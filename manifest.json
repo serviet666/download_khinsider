@@ -1,0 +1,16 @@
+{
+	"name": "Download Khinsider",
+	"version": "0.0.1",
+	"manifest_version": 2,
+	"description": "À regarder plus tard",
+	"icons" : {
+	},
+	"permissions": [
+	],
+	"background": {
+		"scripts": [
+			"js/background.js"
+		]
+		
+	}
+}
