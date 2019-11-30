@@ -1,16 +1,25 @@
 {
-	"name": "Download Khinsider",
+	"name": "Download Khinsider OST",
 	"version": "0.0.1",
 	"manifest_version": 2,
-	"description": "À regarder plus tard",
+	"description": "Télécharger OST sur Khinsider",
 	"icons" : {
+		"16": "favicon.ico"
 	},
 	"permissions": [
+		"tabs",
+		"webNavigation",
+		"pageCapture"
 	],
 	"background": {
 		"scripts": [
-			"js/background.js"
+			"download_ost_khinsider.js"
 		]
 		
+	},
+	"page_action": {
+		"default_icon": {
+			"16": "favicon.ico"
+		}
 	}
 }
