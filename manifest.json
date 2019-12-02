@@ -4,22 +4,26 @@
 	"manifest_version": 2,
 	"description": "Télécharger OST sur Khinsider",
 	"icons" : {
-		"16": "favicon.ico"
 	},
 	"permissions": [
+		"activeTab",
 		"tabs",
 		"webNavigation",
-		"pageCapture"
+		"downloads"
 	],
 	"background": {
 		"scripts": [
-			"download_ost_khinsider.js"
+			"background.js"
 		]
 		
 	},
 	"page_action": {
-		"default_icon": {
-			"16": "favicon.ico"
-		}
-	}
+	},
+	"content_scripts": [{
+		"matches": ["https://downloads.khinsider.com/game-soundtracks/album/*"],
+		"js": [
+			"jquery.min.js",
+			"download_ost_khinsider.js"
+		]
+	}]
 }
