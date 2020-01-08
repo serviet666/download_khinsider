@@ -1,21 +1,30 @@
-var urls = new Set();
-var songlist = $('#songlist .clickable-row a');
-songlist.each(idx => {
-	urls.add($(songlist[idx]).attr('href'));
-});
-var urlsCount = urls.size;
-var count = 0;
-var mp3s = new Array();
-urls.forEach(url => {
-	$.get('https://downloads.khinsider.com' + url, data => {
-		var url = $(data).find('audio')[0].src;
-		mp3s.push(url);
-		if(++count % 50 == 0 || count == urlsCount) {
-			chrome.runtime.sendMessage({'songlist': mp3s});
-			// console.log(mp3s.join(','));
-			// console.log('https://nabreus.fr2.quickconnect.to/webapi/entry.cgi?type=url&destination="home/Public/A classer/New Super Mario Bros. U"&create_list=true&url=[' + mp3s.join() + ']&api=SYNO.DownloadStation2.Task&method=create&version=2');
-			mp3s = new Array();
-		}
-		// console.log(count);
+$(document).ready(() => {
+	var urls = new Set();
+	var songlist = $('.playlistDownloadSong a')
+	songlist.each(idx => {
+		urls.add($(songlist[idx]).attr('href'));
+	});
+	var title = $('h2')[0].textContent;
+	var urlsCount = urls.size;
+	var index = 0;
+	var mp3s = new Array();
+	urls.forEach((value, key, set) => {
+		$.get('https://downloads.khinsider.com' + value, data => {
+			var url = $(data).find('audio')[0].src;
+			mp3s.push(url);
+			if(set.size === ++index) {
+				chrome.runtime.sendMessage({
+					'songlist': mp3s,
+					'title': title
+				});
+				mp3s = new Array();
+			}
+		});
+	});
+	$('.albumMassDownload a').attr('href', '#');
+	$('.albumMassDownload a').on('click', e => {
+		chrome.runtime.sendMessage({
+			
+		});
 	});
 });

@@ -9,7 +9,8 @@
 		"activeTab",
 		"tabs",
 		"webNavigation",
-		"downloads"
+		"downloads",
+		"storage"
 	],
 	"background": {
 		"scripts": [
