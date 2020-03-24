@@ -1,19 +1,26 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+	let folderName = request.title.replace(/\:|\\|\/|\*|\?|\"|\<|\>|\||\~/gi, '_').trim();
 	if(request.type === 'all') {
 		request.songlist.forEach(idx => {
-			let filename = decodeURI(decodeURI(idx.substring(idx.lastIndexOf('/') + 1)));
+			let filename = formatFileName(folderName, idx);
 			console.log(idx);
 			console.log(filename);
 			chrome.downloads.download({
 				'url': idx,
-				'filename': request.title + '/' + filename
+				'filename': filename
 			});
 		});
 	} else if(request.type === 'song') {
-		let filename = decodeURI(decodeURI(request.song.substring(request.song.lastIndexOf('/') + 1)));
+		let filename = formatFileName(folderName, request.song);
+		console.log(request.song);
+		console.log(filename);
 		chrome.downloads.download({
-			'url': song,
-			'filename': request.title + '/' + filename
+			'url': request.song,
+			'filename': filename
 		});
 	}
 });
+
+var formatFileName = (folderName, filename) => {
+	return 'OST/' + folderName + '/' + decodeURI(decodeURI(filename.substring(filename.lastIndexOf('/') + 1))).replace('~','_').trim();
+};

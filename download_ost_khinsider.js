@@ -7,6 +7,10 @@ $(document).ready(() => {
 	let title = $('h2')[0].textContent;
 	let urlsCount = urls.size;
 	let mp3s = new Array();
+	/*$('#audiowrap').css({
+		'position': 'fixed', 
+		'z-index':999
+	});*/
 	$('.albumMassDownload a').attr('href', '#');
 	$('.albumMassDownload a').on('click', e => {
 		urls.forEach((value, key, set) => {
@@ -14,7 +18,7 @@ $(document).ready(() => {
 				let url = $(data).find('audio')[0].src;
 				if(!mp3s.some(el => url === el) && set.size === mp3s.push(url)) {
 					chrome.runtime.sendMessage({
-						'type': all,
+						'type': 'all',
 						'songlist': mp3s,
 						'title': title
 					});
@@ -26,9 +30,10 @@ $(document).ready(() => {
 	$('.playlistDownloadSong a').on('click', e => {
 		console.log(e.currentTarget.href);
 		$.get(e.currentTarget.href, data => {
+			let song = $(data).find('audio')[0].src;
 			chrome.runtime.sendMessage({
 				'type': 'song',
-				'song': $(data).find('audio')[0].src,
+				'song': song,
 				'title': title
 			});
 		});

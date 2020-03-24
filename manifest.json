@@ -1,6 +1,6 @@
 {
 	"name": "Download Khinsider OST",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"manifest_version": 2,
 	"description": "Télécharger OST sur Khinsider",
 	"icons" : {
