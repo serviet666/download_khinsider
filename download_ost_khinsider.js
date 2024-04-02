@@ -11,6 +11,15 @@ $(document).ready(() => {
 		'position': 'fixed', 
 		'z-index':999
 	});*/
+	$('#songlist').css({
+		'display': 'block',
+		'position': 'sticky',
+		'top': '50px',
+		'height': '500px',
+		'overflow-y': 'scroll',
+		'background': 'white',
+		'z-index': 100
+	});
 	$('.albumMassDownload a').attr('href', '#');
 	$('.albumMassDownload a').on('click', e => {
 		urls.forEach((value, key, set) => {

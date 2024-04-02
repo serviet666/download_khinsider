@@ -22,5 +22,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 var formatFileName = (folderName, filename) => {
-	return 'OST/' + folderName + '/' + decodeURI(decodeURI(filename.substring(filename.lastIndexOf('/') + 1))).replace('~','_').trim();
+	var s1 = filename.substring(filename.lastIndexOf('/') + 1)
+	return 'OST/' + folderName + '/' + decodeURI(decodeURI(s1)).replaceAll('~','_').trim();
 };
